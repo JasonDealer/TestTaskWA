@@ -33,7 +33,6 @@ function deleteTag(e) {
     let closeBtns = document.querySelectorAll(".closeBtn");
     closeBtns.forEach(function(entry) {
         if(entry.contains(e.target)){
-            console.log(entry);
             tagArea.removeChild(entry.parentElement);
         }
     });
