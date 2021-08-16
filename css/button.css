@@ -1,0 +1,20 @@
+.addButton {
+    color:#38ef7d;
+    padding: 10px 20px;
+    width:100px;
+    text-decoration:none;
+    text-align:center;
+    margin: auto;
+    display: block;
+    background-image: linear-gradient(to left,transparent,transparent 50%,#11998e 50%,#38ef7d);
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+    font: 400 18px tahoma;
+    border: 1px solid #38ef7d;
+}
+
+.addButton:hover {
+    background-position: 0 0;
+    color:#fff;
+}
