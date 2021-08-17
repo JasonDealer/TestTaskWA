@@ -1,7 +1,8 @@
 .addButton {
+    background-color: #fff;
     color:#38ef7d;
     padding: 10px 20px;
-    width:100px;
+    width:150px;
     text-decoration:none;
     text-align:center;
     margin: auto;
@@ -17,4 +18,15 @@
 .addButton:hover {
     background-position: 0 0;
     color:#fff;
+}
+
+.buttonDisabled {
+    background-color: rgba(100, 100, 100, 0.933);
+    border: 1px solid #000000;
+    color:rgba(100, 100, 100, 0.933);
+}
+
+.buttonDisabled:hover {
+    background-position: 100% 0;
+    color:rgba(100, 100, 100, 0.933);
 }
