@@ -186,5 +186,3 @@ tagArea.addEventListener("click", (e)=> {
 modeSwitcher.addEventListener("click", ()=> {
     toggleMode()
 });
-
-tags.addOneTag = "se";
