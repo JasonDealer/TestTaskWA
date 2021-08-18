@@ -5,17 +5,6 @@ const text = document.querySelector(".form__field"),
 
 let tagNames = [];
 
-function refreshTagList() {
-    let tagList = document.querySelectorAll(".tagName");
-    tagList.forEach(item => {
-        tagNames.push(item.textContent);
-    });
-}
-
-//resresh
-
-refreshTagList();
-
 //getters/setters
     
 let tags = {
@@ -36,18 +25,30 @@ let tags = {
                 </div>
             `;
         });
+        localStorage.removeItem('tagList');
+        addLocalStorage();
         return this.tagNames = newTagList;
     },
     set addOneTag(item) {
-        tagArea.innerHTML += `
-            <div class="tag">
-                <div class="tagName">${item}</div>
-                <div class="closeBtn">
-                    <span class="close"></span>
+        let renderedTags = [];
+        let tagList = document.querySelectorAll(".tagName");
+        tagList.forEach(el => {
+            renderedTags.push(el);
+        });
+        if (renderedTags.indexOf(item) === -1) {
+            tagArea.innerHTML += `
+                <div class="tag">
+                    <div class="tagName">${item}</div>
+                    <div class="closeBtn">
+                        <span class="close"></span>
+                    </div>
                 </div>
-            </div>
-        `;
-        return this.tagNames.push(item);
+            `;
+            this.tagNames.push(item);
+            localStorage.removeItem('tagList');
+            addLocalStorage();
+            return this.tagNames;
+        }
     },
     set deleteOneTag(element) {
         this.tagNames = this.tagNames.filter(i => i !== element);
@@ -62,6 +63,8 @@ let tags = {
                 </div>
             `;
         });
+        localStorage.removeItem('tagList');
+        addLocalStorage();
         return this.tagNames;
     },
     set readonlyMode(condition) {
@@ -73,7 +76,44 @@ let tags = {
             modeSwitcher.checked = false;
         }
     }
-}    
+}
+
+//localstorage
+
+function addLocalStorage() {
+    localStorage.setItem('tagList', tags.tagNames);
+}
+
+function refreshTagList() {
+    let tagList = document.querySelectorAll(".tagName");
+    tags.tagNames = [];
+    tagList.forEach(item => {
+        tags.tagNames.push(item.textContent);
+    });
+    localStorage.removeItem('tagList');
+    addLocalStorage();
+}
+
+//render tag list
+
+function renderTagList() {
+    if (localStorage.getItem("tagList").length > 0){
+        let tagsLS = localStorage.getItem("tagList").split(',');
+        tags.tagNames = tagsLS
+        tagsLS.forEach(element => {
+            tagArea.innerHTML += `
+                <div class="tag">
+                    <div class="tagName">${element}</div>
+                    <div class="closeBtn">
+                        <span class="close"></span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+}
+
+renderTagList();
 
 //get tag name from input
 
@@ -146,3 +186,5 @@ tagArea.addEventListener("click", (e)=> {
 modeSwitcher.addEventListener("click", ()=> {
     toggleMode()
 });
+
+tags.addOneTag = "se";
